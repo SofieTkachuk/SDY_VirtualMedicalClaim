@@ -2,6 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
+config.properties
 
 ### IntelliJ IDEA ###
 .idea/**
@@ -12,6 +13,7 @@ target/
 *.iws
 *.iml
 *.ipr
+*.log
 
 ### Eclipse ###
 .apt_generated

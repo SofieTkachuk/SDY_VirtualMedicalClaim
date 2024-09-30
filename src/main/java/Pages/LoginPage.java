@@ -1,13 +1,12 @@
 package Pages;
 
 import Consts.Consts;
-
-import static Consts.Consts.*;
+import Utils.PropertiesUtil;
 
 public class LoginPage extends BasePage {
 
     public void navigateToLoginPage() {
-        webDriver.get(Consts.MAIN_URL + "login");
+        webDriver.get(PropertiesUtil.getProperty("MAIN_URL") + "login");
     }
 
     public void enterUsername(String username) {

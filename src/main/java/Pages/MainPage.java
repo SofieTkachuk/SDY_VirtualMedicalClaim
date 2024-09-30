@@ -1,13 +1,14 @@
 package Pages;
 
 import Consts.Consts;
+import Utils.PropertiesUtil;
 
 import static Consts.Consts.*;
 
 public class MainPage extends BasePage {
 
     public void navigateToMainPage() {
-        webDriver.get(Consts.MAIN_URL);
+        webDriver.get(PropertiesUtil.getProperty("MAIN_URL"));
     }
     public void openUserProfileDropdown() {
         clickElementByXpath(Consts.USER_PROFILE_DROPDOWN);

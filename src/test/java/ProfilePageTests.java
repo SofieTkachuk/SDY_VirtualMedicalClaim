@@ -2,6 +2,7 @@ import Consts.Consts;
 import Pages.LoginPage;
 import Pages.MainPage;
 import Pages.ProfilePage;
+import Utils.PropertiesUtil;
 import Utils.UseCaseBase;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -34,8 +35,8 @@ public class ProfilePageTests extends UseCaseBase {
 
         logger.info("Setting up tests and logging in...");
         loginPage.navigateToLoginPage();
-        loginPage.enterUsername(Consts.username);
-        loginPage.enterPassword(Consts.pass);
+        loginPage.enterUsername(PropertiesUtil.getProperty("username"));
+        loginPage.enterPassword(PropertiesUtil.getProperty("pass"));
         loginPage.clickLoginButton();
         // Users can go to the Profile window after the login procedure
         mainPage.openUserProfileDropdown();
@@ -113,7 +114,7 @@ public class ProfilePageTests extends UseCaseBase {
         assertTrue(profilePage.isEmailFieldPresent());
         String emailFieldValue = profilePage.getEmailFieldValue();
         assertTrue(emailFieldValue != null && !emailFieldValue.isEmpty());
-        String expectedEmail = Consts.email; // an email is visible on the field by default
+        String expectedEmail = PropertiesUtil.getProperty("email"); // an email is visible on the field by default
         assertEquals(expectedEmail, emailFieldValue, "The email is not visible.");
         logger.info("The email field is visible.");
     }
@@ -124,7 +125,7 @@ public class ProfilePageTests extends UseCaseBase {
         assertTrue(profilePage.isFirstNameFieldPresent());
         String firstNameFieldValue = profilePage.getFirstNameFieldValue();
         assertTrue(firstNameFieldValue != null && !firstNameFieldValue.isEmpty());
-        String expectedFirstName = Consts.first_name; // first name is visible on the field by default
+        String expectedFirstName = PropertiesUtil.getProperty("first_name"); // first name is visible on the field by default
         assertEquals(expectedFirstName, firstNameFieldValue, "The first name is not visible.");
         logger.info("The first name field is visible.");
     }
@@ -144,7 +145,7 @@ public class ProfilePageTests extends UseCaseBase {
         assertTrue(profilePage.isUsernameFieldPresent());
         String usernameFieldValue = profilePage.getUsernameFieldValue();
         assertTrue(usernameFieldValue != null && !usernameFieldValue.isEmpty());
-        String expectedUsername = Consts.username; // username is visible on the field by default
+        String expectedUsername = PropertiesUtil.getProperty("username"); // username is visible on the field by default
         assertEquals(expectedUsername, usernameFieldValue, "The username is not visible.");
         logger.info("The username field is visible.");
     }
@@ -155,7 +156,7 @@ public class ProfilePageTests extends UseCaseBase {
         assertTrue(profilePage.isLastNameFieldPresent());
         String lastNameFieldValue = profilePage.getLastNameFieldValue();
         assertTrue(lastNameFieldValue != null && !lastNameFieldValue.isEmpty());
-        String expectedLastName = Consts.last_name; // // last name is visible on the field by default
+        String expectedLastName = PropertiesUtil.getProperty("last_name"); // // last name is visible on the field by default
         assertEquals(expectedLastName, lastNameFieldValue, "The last name is not visible.");
         logger.info("The last name field is visible.");
     }
@@ -187,19 +188,19 @@ public class ProfilePageTests extends UseCaseBase {
                         Consts.LAST_NAME_FIELD_PROFILE);
 
         logger.info("Checking if a user can input values to the fields.");
-        profilePage.enterEmail(Consts.email);
-        profilePage.enterFirstName(Consts.first_name_updated);
-        profilePage.enterReplyTo(Consts.email);
-        profilePage.enterUsername(Consts.username_updated);
-        profilePage.enterLastName(Consts.last_name_updated);
+        profilePage.enterEmail(PropertiesUtil.getProperty("email"));
+        profilePage.enterFirstName(PropertiesUtil.getProperty("first_name_updated"));
+        profilePage.enterReplyTo(PropertiesUtil.getProperty("email"));
+        profilePage.enterUsername(PropertiesUtil.getProperty("username_updated"));
+        profilePage.enterLastName(PropertiesUtil.getProperty("last_name_updated"));
 
         mainPage.takeScreenshot("InputValuesToFieldsTest");
 
-        assertEquals(Consts.email, profilePage.getEmailFieldValue(), "Email field should have a value.");
-        assertEquals(Consts.first_name_updated, profilePage.getFirstNameFieldValue(), "First Name field should have a value.");
-        assertEquals(Consts.email, profilePage.getReplyToFieldFieldValue(), "Reply to field should have a value.");
-        assertEquals(Consts.username_updated, profilePage.getUsernameFieldValue(), "Username field should have a value.");
-        assertEquals(Consts.last_name_updated, profilePage.getLastNameFieldValue(), "Last Name field should have a value.");
+        assertEquals(PropertiesUtil.getProperty("email"), profilePage.getEmailFieldValue(), "Email field should have a value.");
+        assertEquals(PropertiesUtil.getProperty("first_name_updated"), profilePage.getFirstNameFieldValue(), "First Name field should have a value.");
+        assertEquals(PropertiesUtil.getProperty("email"), profilePage.getReplyToFieldFieldValue(), "Reply to field should have a value.");
+        assertEquals(PropertiesUtil.getProperty("username_updated"), profilePage.getUsernameFieldValue(), "Username field should have a value.");
+        assertEquals(PropertiesUtil.getProperty("last_name_updated"), profilePage.getLastNameFieldValue(), "Last Name field should have a value.");
         logger.info("Value is entered.");
     }
 
@@ -237,7 +238,7 @@ public class ProfilePageTests extends UseCaseBase {
         mainPage.navigateToMainPage();
         profilePage.navigateToProfilePage();
         mainPage.takeScreenshot("EmptyFirstNameErrorMsg");
-        assertEquals(Consts.first_name, profilePage.getFirstNameFieldValue(),"The field should not be empty.");
+        assertEquals(PropertiesUtil.getProperty("first_name"), profilePage.getFirstNameFieldValue(),"The field should not be empty.");
         logger.info("The system does not allow to update information with an empty first name.");
     }
 
@@ -261,7 +262,7 @@ public class ProfilePageTests extends UseCaseBase {
         mainPage.navigateToMainPage();
         profilePage.navigateToProfilePage();
         mainPage.takeScreenshot("EmptyLastNameErrorMsg");
-        assertEquals(Consts.last_name, profilePage.getLastNameFieldValue(),"The field should not be empty.");
+        assertEquals(PropertiesUtil.getProperty("last_name"), profilePage.getLastNameFieldValue(),"The field should not be empty.");
         logger.info("The system does not allow to update information with an empty last name.");
     }
 
@@ -318,14 +319,14 @@ public class ProfilePageTests extends UseCaseBase {
     @Test // Validate that users can input a value to fields
     public void changePasswordInputValue() throws IOException {
         logger.info("Entering a value to the field.");
-        profilePage.enterOldPassword(Consts.pass);
-        profilePage.setNewPassword(Consts.new_password);
-        profilePage.setRepeatNewPass(Consts.new_password);
+        profilePage.enterOldPassword(PropertiesUtil.getProperty("pass"));
+        profilePage.setNewPassword(PropertiesUtil.getProperty("new_password"));
+        profilePage.setRepeatNewPass(PropertiesUtil.getProperty("new_password"));
 
         mainPage.takeScreenshot("ChangePassInputTest");
-        assertEquals(Consts.pass, profilePage.getOldPassValue(), "Email field don't have a value.");
-        assertEquals(Consts.new_password, profilePage.getNewPassValue(), "First Name field don't have a value.");
-        assertEquals(Consts.new_password, profilePage.getRepeatNewPassValue(), "Username field don't have a value.");
+        assertEquals(PropertiesUtil.getProperty("pass"), profilePage.getOldPassValue(), "Email field don't have a value.");
+        assertEquals(PropertiesUtil.getProperty("new_password"), profilePage.getNewPassValue(), "First Name field don't have a value.");
+        assertEquals(PropertiesUtil.getProperty("new_password"), profilePage.getRepeatNewPassValue(), "Username field don't have a value.");
         logger.info("The pass value is entered.");
     }
 
@@ -368,9 +369,9 @@ public class ProfilePageTests extends UseCaseBase {
     @Test
     // Validate that the user can change the password with all valid inputs: a valid old password and a matching password rules new password
     public void changePasswordTest() throws IOException {
-        profilePage.enterOldPassword(Consts.pass);
-        profilePage.setNewPassword(Consts.new_password);
-        profilePage.setRepeatNewPass(Consts.new_password);
+        profilePage.enterOldPassword(PropertiesUtil.getProperty("pass"));
+        profilePage.setNewPassword(PropertiesUtil.getProperty("new_password"));
+        profilePage.setRepeatNewPass(PropertiesUtil.getProperty("new_password"));
 
         profilePage.clickUpdateInformationButton();
         mainPage.takeScreenshot("ChangePassTest");
@@ -402,7 +403,7 @@ public class ProfilePageTests extends UseCaseBase {
     @ParameterizedTest // Validate that the password cannot be changed if not meets requirements
     @ValueSource(strings = {"NoPas1!", "12345тутQ!", "12345hello!", "12345HELLO!", "ThisIsIncorrectPass!", "ThisIsIncorrectPass1"})
     public void validatePasswordChangeWithInvalidPassInputs(String passInputIncorrect) throws IOException {
-        profilePage.enterOldPassword(Consts.pass);
+        profilePage.enterOldPassword(PropertiesUtil.getProperty("pass"));
         profilePage.setNewPassword(passInputIncorrect);
         profilePage.setRepeatNewPass(passInputIncorrect);
         mainPage.takeScreenshot("InvalidInfoPassErrorMsg");
@@ -500,7 +501,7 @@ public class ProfilePageTests extends UseCaseBase {
         profilePage.clickCancelButton();
         String url = webDriver.getCurrentUrl();
         mainPage.takeScreenshot("CancelButton");
-        assertEquals(url, Consts.MAIN_URL);
+        assertEquals(url, PropertiesUtil.getProperty("MAIN_URL"));
         logger.info("The button is visible and is clickable.");
     }
 }

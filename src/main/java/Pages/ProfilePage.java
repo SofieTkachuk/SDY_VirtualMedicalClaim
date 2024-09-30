@@ -1,6 +1,7 @@
 package Pages;
 
 import Consts.Consts;
+import Utils.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebElement;
@@ -14,31 +15,31 @@ import java.util.List;
 public class ProfilePage extends BasePage {
 
     public String navigateToProfilePage() {
-        webDriver.get(Consts.MAIN_URL + "profile");
+        webDriver.get(PropertiesUtil.getProperty("MAIN_URL") + "profile");
         return webDriver.getCurrentUrl();
     }
 
     public void resetToDefaultValues() {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(2));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Consts.EMAIL_FIELD_PROFILE)));
-        if (!getEmailFieldValue().equals(Consts.email)) {
+        if (!getEmailFieldValue().equals(PropertiesUtil.getProperty("email"))) {
             clearFields(Consts.EMAIL_FIELD_PROFILE);
-            enterEmail(Consts.email);
+            enterEmail(PropertiesUtil.getProperty("email"));
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Consts.FIRST_NAME_FIELD_PROFILE)));
-        if (!getFirstNameFieldValue().equals(Consts.first_name)) {
+        if (!getFirstNameFieldValue().equals(PropertiesUtil.getProperty("first_name"))) {
             clearFields(Consts.FIRST_NAME_FIELD_PROFILE);
-            enterFirstName(Consts.first_name);
+            enterFirstName(PropertiesUtil.getProperty("first_name"));
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Consts.LAST_NAME_FIELD_PROFILE)));
-        if (!getLastNameFieldValue().equals(Consts.last_name)) {
+        if (!getLastNameFieldValue().equals(PropertiesUtil.getProperty("last_name"))) {
             clearFields(Consts.LAST_NAME_FIELD_PROFILE);
-            enterLastName(Consts.last_name);
+            enterLastName(PropertiesUtil.getProperty("last_name"));
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Consts.USER_NAME_FIELD)));
-        if (!getUsernameFieldValue().equals(Consts.username)) {
+        if (!getUsernameFieldValue().equals(PropertiesUtil.getProperty("username"))) {
             clearFields(Consts.USER_NAME_FIELD);
-            enterUsername(Consts.username);
+            enterUsername(PropertiesUtil.getProperty("username"));
         }
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Consts.REPLY_TO_FIELD)));
         if (!getReplyToFieldFieldValue().isEmpty()) {
@@ -49,12 +50,12 @@ public class ProfilePage extends BasePage {
 
     public void resetToDefaultPassword() {
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(2));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Consts.OLD_PASSWORD_PROFILE)));
-        enterOldPassword(Consts.new_password);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Consts.NEW_PASSWORD_PROFILE)));
-        setNewPassword(Consts.pass);
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Consts.OLD_PASSWORD_FIELD)));
+        enterOldPassword(PropertiesUtil.getProperty("new_password"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Consts.NEW_PASSWORD_FIELD)));
+        setNewPassword(PropertiesUtil.getProperty("pass"));
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(Consts.REPEAT_NEW_PASSWORD_FIELD)));
-        setRepeatNewPass(Consts.pass);
+        setRepeatNewPass(PropertiesUtil.getProperty("pass"));
         clickUpdateInformationButton();
     }
 

@@ -1,6 +1,7 @@
 package Pages;
 
 import Consts.Consts;
+import Utils.PropertiesUtil;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -14,7 +15,7 @@ import static java.lang.String.format;
 
 public class DoctorCalendarPage extends BasePage{
     public String navigateToDoctorCalendarPage() {
-        webDriver.get(Consts.MAIN_URL + "appointment");
+        webDriver.get(PropertiesUtil.getProperty("MAIN_URL") + "appointment");
         return webDriver.getCurrentUrl();
     }
 
@@ -32,16 +33,7 @@ public class DoctorCalendarPage extends BasePage{
     }
 
     public boolean areButtonsVisible() {
-        try {
-            elementExists(Consts.RESOURCE_DAY_BUTTON);
-            elementExists(Consts.LIST_WEEK_BUTTON);
-            elementExists(Consts.LIST_MONTH_BUTTON);
-            elementExists(Consts.LIST_DAY_BUTTON);
-            return true;
-        }
-        catch (Exception e) {
-            return false;
-        }
+        return elementExists(Consts.DOCTOR_CALENDAR_ALL_BUTTONS);
     }
 
     public boolean isDateHeaderVisible() {

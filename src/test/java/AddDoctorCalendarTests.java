@@ -2,6 +2,7 @@ import Consts.Consts;
 import Pages.DoctorCalendarPage;
 import Pages.LoginPage;
 import Pages.MainPage;
+import Utils.PropertiesUtil;
 import Utils.UseCaseBase;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -38,8 +39,8 @@ public class AddDoctorCalendarTests extends UseCaseBase {
 
         logger.info("Setting up tests and logging in...");
         loginPage.navigateToLoginPage();
-        loginPage.enterUsername(Consts.username);
-        loginPage.enterPassword(Consts.pass);
+        loginPage.enterUsername(PropertiesUtil.getProperty("username"));
+        loginPage.enterPassword(PropertiesUtil.getProperty("pass"));
         loginPage.clickLoginButton();
         // Users can go to the Doctor Calendar page after the login procedure
         mainPage.openOtherMenuDropdown();
@@ -591,7 +592,6 @@ public class AddDoctorCalendarTests extends UseCaseBase {
 
         logger.info("Checking that type options are visible to select.");
         WebDriverWait wait = new WebDriverWait(webDriver, Duration.ofSeconds(5));
-        //waitForElementVisible(Duration.ofSeconds(5), By.xpath(Consts.DROPDOWN_OPTIONS));
         doctorCalendarPage.impWait(2);
         logger.info("Checking that the option can be selected.");
         WebElement optionToSelect = wait.until(ExpectedConditions.elementToBeClickable(By.xpath(Consts.DROPDOWN_OPTION_TO_SELECT + expectedDropdownOption + "']")));
